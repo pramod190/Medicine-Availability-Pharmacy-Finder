@@ -1,0 +1,319 @@
+.mappage {
+  display: flex;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+/* Sidebar */
+.mappage-sidebar {
+  width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+
+.mappage-top {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mappage-title {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+.map-filters {
+  display: flex;
+  gap: 8px;
+}
+.map-filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-filter-btn.active,
+.map-filter-btn:hover {
+  background: rgba(0,200,150,0.1);
+  color: var(--teal-300);
+  border-color: var(--teal-400);
+}
+
+/* List */
+.pharmacy-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.map-loading, .map-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-direction: column;
+}
+
+.map-pharm-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+  margin-bottom: 4px;
+}
+.map-pharm-item:hover { background: rgba(0,200,150,0.06); }
+.map-pharm-item.active {
+  background: rgba(0,200,150,0.1);
+  border-color: var(--teal-400);
+}
+
+.map-pharm-num {
+  width: 26px;
+  height: 26px;
+  background: var(--teal-500);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.map-pharm-item.active .map-pharm-num { background: var(--teal-400); box-shadow: 0 0 10px var(--teal-400); }
+
+.map-pharm-info { flex: 1; min-width: 0; }
+.map-pharm-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.map-pharm-addr {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.map-pharm-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Map area */
+.mappage-map {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-visual {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #0a1520;
+}
+
+.map-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,200,150,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,150,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Pins */
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s;
+}
+.map-pin:hover { z-index: 20; transform: translate(-50%, -100%) scale(1.1); }
+.map-pin.selected { z-index: 30; transform: translate(-50%, -100%) scale(1.15); }
+
+.pin-dot {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--teal-400), var(--teal-600));
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,200,150,0.4);
+}
+.pin-dot > * { transform: rotate(45deg); }
+.map-pin.selected .pin-dot {
+  background: linear-gradient(135deg, var(--accent-gold), #e5a800);
+  box-shadow: 0 4px 20px rgba(245,200,66,0.5);
+}
+.map-pin.out .pin-dot { background: linear-gradient(135deg, var(--accent-red), #b03040); }
+
+.pin-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* User pin */
+.user-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.user-pin-inner {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-blue);
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(79,158,255,0.6);
+  position: relative;
+  z-index: 2;
+}
+.user-pin-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(79,158,255,0.3);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50%       { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
+}
+
+/* Legend */
+.map-legend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(8,15,20,0.9);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+}
+.legend-dot.teal   { background: var(--teal-400); }
+.legend-dot.red    { background: var(--accent-red); }
+.legend-dot.blue   { background: var(--accent-blue); }
+
+.map-note {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(8,15,20,0.85);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Detail panel */
+.map-detail-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 40;
+  animation: fadeUp 0.2s ease;
+  overflow: hidden;
+}
+.map-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.map-detail-header h3 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.map-detail-header p { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+.map-detail-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+.map-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.map-detail-row a { color: var(--teal-400); }
+.map-detail-row svg { color: var(--teal-400); flex-shrink: 0; }
+.map-stock-info {
+  background: rgba(0,200,150,0.08);
+  border: 1px solid rgba(0,200,150,0.15);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .mappage { flex-direction: column; height: auto; }
+  .mappage-sidebar { width: 100%; max-height: 45vh; }
+  .mappage-map { height: 55vh; }
+  .map-visual { height: 100%; }
+}

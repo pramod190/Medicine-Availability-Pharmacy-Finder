@@ -1,0 +1,136 @@
+.subs-page { padding: 32px 24px 80px; }
+.subs-container { max-width: 960px; margin: 0 auto; }
+
+.subs-header { text-align: center; margin-bottom: 32px; }
+.subs-header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.subs-header p  { font-size: 15px; color: var(--text-secondary); }
+
+.ai-feature-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+.ai-feature-badge.purple {
+  background: rgba(155,107,255,0.12);
+  border: 1px solid rgba(155,107,255,0.25);
+  color: var(--accent-purple);
+}
+.ai-feature-badge.teal {
+  background: rgba(0,200,150,0.1);
+  border: 1px solid rgba(0,200,150,0.2);
+  color: var(--teal-400);
+}
+.ai-feature-badge.red {
+  background: rgba(255,79,107,0.1);
+  border: 1px solid rgba(255,79,107,0.2);
+  color: var(--accent-red);
+}
+
+.subs-form { padding: 24px; margin-bottom: 28px; }
+.subs-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--text-muted);
+}
+
+.subs-analyze-btn {
+  width: 100%; padding: 13px; margin-top: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  font-size: 15px;
+  background: linear-gradient(135deg, var(--accent-purple), #7048c0);
+  box-shadow: 0 4px 20px rgba(155,107,255,0.3);
+}
+.subs-analyze-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.subs-analyze-btn:disabled { opacity: 0.6; transform: none; }
+
+/* Results */
+.subs-results { display: flex; flex-direction: column; gap: 20px; }
+
+.subs-summary {
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap;
+  gap: 12px; padding: 16px 20px;
+}
+.subs-summary-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.subs-orig-name {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 800;
+  color: var(--text-primary);
+}
+.subs-consult-warn {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 600;
+  color: var(--accent-gold);
+  background: rgba(245,200,66,0.08);
+  border: 1px solid rgba(245,200,66,0.2);
+  border-radius: var(--radius-md);
+  padding: 7px 12px;
+}
+
+.subs-advice {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(79,158,255,0.08);
+  border: 1px solid rgba(79,158,255,0.2);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--accent-blue);
+}
+
+.subs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.sub-card {
+  position: relative;
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: all 0.2s;
+}
+.sub-card:hover { transform: translateY(-3px); }
+.sub-card.sub-warn { border-color: rgba(245,200,66,0.3) !important; }
+
+.sub-rank {
+  position: absolute; top: 16px; right: 16px;
+  width: 24px; height: 24px;
+  background: rgba(0,200,150,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  color: var(--teal-400);
+}
+
+.sub-name {
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 800;
+  margin-bottom: 2px;
+}
+.sub-generic { font-size: 12px; color: var(--text-muted); }
+.sub-badges  { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.sub-notes, .sub-caution {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12px; line-height: 1.5;
+}
+.sub-notes  { color: var(--text-secondary); }
+.sub-caution { color: var(--accent-gold); }
+
+.sub-find-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 7px; font-size: 12px; padding: 8px;
+  margin-top: auto;
+}
+
+.subs-reset-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; font-size: 13px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .subs-form-grid { grid-template-columns: 1fr; }
+}

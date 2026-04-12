@@ -1,0 +1,154 @@
+.pharm-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.22s;
+}
+
+.pharm-card:hover {
+  transform: translateY(-2px);
+}
+
+.pharm-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pharm-info { flex: 1; min-width: 0; }
+
+.pharm-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pharm-name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pharm-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.pharm-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.distance-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--teal-400) !important;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.pharm-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(245,200,66,0.1);
+  border: 1px solid rgba(245,200,66,0.2);
+  border-radius: 100px;
+  padding: 4px 10px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  white-space: nowrap;
+}
+.star-icon { color: var(--accent-gold); }
+.rating-count { font-size: 11px; font-weight: 400; color: var(--text-muted); }
+
+.pharm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.phone-chip { text-decoration: none; color: var(--text-secondary); }
+.phone-chip:hover { color: var(--teal-300); border-color: var(--teal-400); }
+
+/* Stock section */
+.pharm-stock {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.stock-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.stock-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stock-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+.stock-qty {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.price {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--teal-400);
+}
+.mrp {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* Actions */
+.pharm-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pharm-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  justify-content: center;
+  font-size: 13px;
+  padding: 9px 16px;
+}
+.out-of-stock-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent-gold);
+  padding: 9px 0;
+}

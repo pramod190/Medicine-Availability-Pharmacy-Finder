@@ -1,0 +1,114 @@
+.orders-page { padding: 32px 24px 80px; }
+.orders-container { max-width: 800px; margin: 0 auto; }
+.orders-header { margin-bottom: 28px; }
+.orders-header h1 { font-size: 26px; font-weight: 800; }
+
+.orders-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.orders-empty h2 { font-size: 20px; color: var(--text-primary); }
+.orders-empty p  { font-size: 14px; margin-bottom: 8px; }
+
+.orders-list-page { display: flex; flex-direction: column; gap: 16px; }
+
+.order-card { padding: 20px; }
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.order-card-id { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.order-date { font-size: 12px; color: var(--text-muted); }
+
+/* Progress bar */
+.order-progress {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  flex: 1;
+  min-width: 70px;
+}
+.progress-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border);
+  transition: all 0.3s;
+  z-index: 2;
+}
+.progress-step.done .progress-dot {
+  background: var(--teal-400);
+  border-color: var(--teal-400);
+  box-shadow: 0 0 8px rgba(0,200,150,0.4);
+}
+.progress-line {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  z-index: 1;
+}
+.progress-step.done .progress-line { background: var(--teal-400); }
+.progress-step span {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+.progress-step.done span { color: var(--teal-400); }
+
+.order-card-body { display: flex; flex-direction: column; gap: 14px; }
+.order-pharmacy-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.order-items-list { display: flex; flex-direction: column; gap: 6px; }
+.order-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.order-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  font-size: 12px;
+}
+.order-grand-total {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--teal-400);
+}
