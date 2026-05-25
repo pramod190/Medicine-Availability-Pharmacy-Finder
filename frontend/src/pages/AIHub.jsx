@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bot, FileImage, RefreshCw, FlaskConical, Sparkles, ArrowRight, Zap } from 'lucide-react';
+import { Bot, FileImage, RefreshCw, FlaskConical, Sparkles, ArrowRight, Zap, HelpCircle } from 'lucide-react';
 import './AIHub.css';
 
 const AI_FEATURES = [
@@ -42,8 +42,17 @@ const AI_FEATURES = [
     color:   'red',
     badge:   'Safety Critical',
     example: '"Is it safe to take Aspirin + Warfarin + Metformin?"',
-  },
-];
+  },  {
+    icon:    <HelpCircle size={28} />,
+    title:   'AI Demo',
+    tagline: 'Edge Case Agent',
+    desc:    'Open the AI edge-case demo in a new tab to test tricky pharmacy questions and failure modes.',
+    link:    '/ai-demo',
+    color:   'purple',
+    badge:   'New Tab',
+    example: '"I am allergic to penicillin — what antibiotics are safe?"',
+    newTab:  true,
+  },];
 
 const COLOR_MAP = {
   purple: { bg: 'rgba(155,107,255,0.1)', border: 'rgba(155,107,255,0.25)', icon: 'rgba(155,107,255,0.15)', color: 'var(--accent-purple)' },
@@ -104,9 +113,15 @@ export default function AIHub() {
                     <em>{f.example}</em>
                   </div>
                 </div>
-                <Link to={f.link} className="aihub-card-btn">
-                  Launch {f.title} <ArrowRight size={15} />
-                </Link>
+                {f.newTab ? (
+                  <a href={f.link} target="_blank" rel="noreferrer" className="aihub-card-btn">
+                    Launch {f.title} <ArrowRight size={15} />
+                  </a>
+                ) : (
+                  <Link to={f.link} className="aihub-card-btn">
+                    Launch {f.title} <ArrowRight size={15} />
+                  </Link>
+                )}
               </div>
             );
           })}

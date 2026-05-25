@@ -1,6 +1,7 @@
 const router   = require('express').Router();
 const Pharmacy = require('../models/Pharmacy');
 const Inventory = require('../models/Inventory');
+const User     = require('../models/User');
 const { auth, pharmacyAdmin } = require('../middleware/auth');
 
 // ── Get nearby pharmacies ──────────────────────────────────────────────────────
@@ -71,7 +72,9 @@ router.get('/:id/inventory', async (req, res) => {
 router.post('/', auth, async (req, res) => {
   try {
     const pharmacy = await Pharmacy.create({ ...req.body, owner: req.user._id });
-    await require('../models/User').findByIdAndUpdate(req.user._id, { role: 'pharmacy_admin' });
+    if (req.user.role !== 'admin') {
+      await User.findByIdAndUpdate(req.user._id, { role: 'pharmacy_admin' });
+    }
     res.status(201).json(pharmacy);
   } catch (err) {
     res.status(500).json({ message: err.message });

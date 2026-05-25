@@ -1,7 +1,15 @@
 const router    = require('express').Router();
 const Order     = require('../models/Order');
 const Inventory = require('../models/Inventory');
+const Pharmacy  = require('../models/Pharmacy');
 const { auth } = require('../middleware/auth');
+
+async function authorizePharmacyAccess(req, pharmacyId) {
+  if (req.user.role === 'admin') return true;
+  const pharmacy = await Pharmacy.findById(pharmacyId);
+  if (!pharmacy) return null;
+  return pharmacy.owner?.toString() === req.user._id.toString();
+}
 
 // ── Create order ───────────────────────────────────────────────────────────────
 router.post('/', auth, async (req, res) => {
@@ -47,6 +55,10 @@ router.get('/my-orders', auth, async (req, res) => {
 // ── Get pharmacy orders ────────────────────────────────────────────────────────
 router.get('/pharmacy/:pharmacyId', auth, async (req, res) => {
   try {
+    const allowed = await authorizePharmacyAccess(req, req.params.pharmacyId);
+    if (allowed === null) return res.status(404).json({ message: 'Pharmacy not found' });
+    if (!allowed) return res.status(403).json({ message: 'Access denied' });
+
     const orders = await Order.find({ pharmacy: req.params.pharmacyId })
       .populate('user', 'name phone email')
       .sort({ createdAt: -1 });
@@ -62,6 +74,10 @@ router.put('/:id/status', auth, async (req, res) => {
     const { status } = req.body;
     const order = await Order.findById(req.params.id);
     if (!order) return res.status(404).json({ message: 'Order not found' });
+
+    const allowed = await authorizePharmacyAccess(req, order.pharmacy);
+    if (allowed === null) return res.status(404).json({ message: 'Order pharmacy not found' });
+    if (!allowed) return res.status(403).json({ message: 'Access denied' });
 
     order.status = status;
     order.statusHistory.push({ status });

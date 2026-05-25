@@ -16,6 +16,7 @@ import Substitutes from './pages/Substitutes';
 import InteractionChecker from './pages/InteractionChecker';
 import MediBot from './pages/MediBot';
 import AIHub from './pages/AIHub';
+import AIDemo from './pages/AIDemo';
 
 function Protected({ children, roles }) {
   const { user } = useAuth();
@@ -40,6 +41,7 @@ function AppRoutes() {
         <Route path="/substitutes" element={<Substitutes />} />
         <Route path="/interactions"element={<InteractionChecker />} />
         <Route path="/prescription" element={<Protected><PrescriptionOCR /></Protected>} />
+        <Route path="/ai-demo" element={<AIDemo />} />
         <Route path="/dashboard"   element={<Protected roles={['pharmacy_admin','admin']}><Dashboard /></Protected>} />
         <Route path="/orders"      element={<Protected><Orders /></Protected>} />
         <Route path="/reminders"   element={<Protected><Reminders /></Protected>} />

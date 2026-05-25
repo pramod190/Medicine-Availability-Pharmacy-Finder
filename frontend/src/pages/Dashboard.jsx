@@ -426,10 +426,17 @@ export default function Dashboard() {
           <h1>{pharmacy.name}</h1>
           <p className="dashboard-addr">{pharmacy.address}</p>
         </div>
-        <div className="dashboard-badges">
-          {pharmacy.isOpen24 && <span className="badge badge-blue">24h Open</span>}
-          {pharmacy.isVerified && <span className="badge badge-teal">✓ Verified</span>}
-          <span className="badge badge-gold">⭐ {pharmacy.rating}</span>
+        <div className="dashboard-header-actions">
+          {user.role === 'admin' && (
+            <button className="btn-primary" style={{ display:'flex', alignItems:'center', gap:8 }} onClick={() => setRegModal(true)}>
+              <Store size={14} /> Add Pharmacy
+            </button>
+          )}
+          <div className="dashboard-badges">
+            {pharmacy.isOpen24 && <span className="badge badge-blue">24h Open</span>}
+            {pharmacy.isVerified && <span className="badge badge-teal">✓ Verified</span>}
+            <span className="badge badge-gold">⭐ {pharmacy.rating}</span>
+          </div>
         </div>
       </div>
 
@@ -611,6 +618,12 @@ export default function Dashboard() {
                     <button className="btn-outline" style={{ marginTop:10, width:'100%', display:'flex', alignItems:'center', justifyContent:'center', gap:6, fontSize:13 }}
                       onClick={() => handleOrderStatus(order._id, 'out_for_delivery')}>
                       Mark Out for Delivery
+                    </button>
+                  )}
+                  {order.status === 'out_for_delivery' && (
+                    <button className="btn-primary" style={{ marginTop:10, width:'100%', display:'flex', alignItems:'center', justifyContent:'center', gap:6, fontSize:13 }}
+                      onClick={() => handleOrderStatus(order._id, 'delivered')}>
+                      Mark Delivered
                     </button>
                   )}
                 </div>

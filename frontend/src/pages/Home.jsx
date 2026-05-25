@@ -175,6 +175,22 @@ export default function Home() {
                   <MapPin size={14} /> View on Map
                 </button>
               </div>
+
+              {results.inventories.length === 0 && (
+                <div className="no-stock-card card" style={{ marginTop: 20, padding: 18, border: '1px solid var(--border)', background: 'var(--bg-elevated)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+                    <div>
+                      <h3 style={{ margin: 0, fontSize: 18 }}>No nearby stock found</h3>
+                      <p style={{ margin: '8px 0 0', color: 'var(--text-muted)', maxWidth: 640 }}>
+                        We couldn't find any pharmacy nearby with "{lastQuery}" in stock. Send a broadcast request so nearby pharmacies can respond if they have it.
+                      </p>
+                    </div>
+                    <button className="btn-primary" onClick={handleBroadcast}>
+                      <Zap size={15} /> Broadcast Request
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Pharmacy Grid */}

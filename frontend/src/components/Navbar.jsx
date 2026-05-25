@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useSocket } from '../context/SocketContext';
 import {
   Pill, Search, MapPin, LayoutDashboard, ShoppingBag,
-  Bell, LogOut, Menu, X, Activity, Bot, FlaskConical, RefreshCw, FileImage
+  Bell, LogOut, Menu, X, Activity, Bot, FlaskConical, RefreshCw, FileImage, Sparkles
 } from 'lucide-react';
 import './Navbar.css';
 

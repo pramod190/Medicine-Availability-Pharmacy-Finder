@@ -1,20 +1,25 @@
 # Dependencies
 node_modules/
 
-# Env files (VERY IMPORTANT)
+# Env files — keep .env.example (safe), ignore real .env
 .env
 backend/.env
 frontend/.env
+!.env.example
+!backend/.env.example
+!frontend/.env.example
 
 # Logs
 *.log
 
-# Build files
+# Build output
 dist/
 build/
 
 # OS files
 .DS_Store
+Thumbs.db
 
-# Uploads (optional)
-backend/uploads/
+# Uploads (user files — not committed)
+backend/uploads/*
+!backend/uploads/.gitkeep
