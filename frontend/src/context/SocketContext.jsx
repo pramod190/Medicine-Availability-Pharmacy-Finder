@@ -12,28 +12,44 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
-    socketRef.current = io(SOCKET_URL, { transports: ['websocket'] });
 
-    socketRef.current.on('connect', () => setConnected(true));
-    socketRef.current.on('disconnect', () => setConnected(false));
+    try {
+      // Use polling first then upgrade to websocket
+      // websocket-only fails on Render free tier during cold start
+      socketRef.current = io(SOCKET_URL, {
+        transports: ['polling', 'websocket'],
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 2000,
+        timeout: 20000,
+      });
 
-    if (user) {
-      socketRef.current.emit('join-user', user.id);
+      socketRef.current.on('connect', () => setConnected(true));
+      socketRef.current.on('disconnect', () => setConnected(false));
+      socketRef.current.on('connect_error', () => setConnected(false));
+
+      if (user) {
+        socketRef.current.emit('join-user', user.id);
+      }
+
+      socketRef.current.on('order-update', (data) => {
+        addNotification({ type: 'order', message: `Order ${data.orderId} is now ${data.status}`, data });
+      });
+
+      socketRef.current.on('request-fulfilled', (data) => {
+        addNotification({ type: 'request', message: `${data.pharmacy.name} has ${data.medicineName}!`, data });
+      });
+
+      socketRef.current.on('stock-update', (data) => {
+        addNotification({ type: 'stock', message: `Stock updated`, data });
+      });
+    } catch (err) {
+      console.warn('Socket connection failed (non-fatal):', err.message);
     }
 
-    socketRef.current.on('order-update', (data) => {
-      addNotification({ type: 'order', message: `Order ${data.orderId} is now ${data.status}`, data });
-    });
-
-    socketRef.current.on('request-fulfilled', (data) => {
-      addNotification({ type: 'request', message: `${data.pharmacy.name} has ${data.medicineName}!`, data });
-    });
-
-    socketRef.current.on('stock-update', (data) => {
-      addNotification({ type: 'stock', message: `Stock updated`, data });
-    });
-
-    return () => socketRef.current?.disconnect();
+    return () => {
+      try { socketRef.current?.disconnect(); } catch (_) {}
+    };
   }, [user]);
 
   const addNotification = (notif) => {
