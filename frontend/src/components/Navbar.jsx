@@ -10,7 +10,7 @@ import './Navbar.css';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
-  const { notifications } = useSocket();
+  const { notifications = [], markRead, markAllRead } = useSocket() || {};
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,6 +18,7 @@ export default function Navbar() {
   const [aiOpen,     setAiOpen]     = useState(false);
 
   const unread = notifications.filter((n) => !n.read).length;
+
 
   const coreLinks = [
     { to: '/',          icon: <Search size={15} />,       label: 'Search'    },
