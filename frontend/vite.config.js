@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     build: {
       outDir: 'dist',
-      sourcemap: false,
+      sourcemap: true,
       chunkSizeWarningLimit: 600,
       rollupOptions: {
         output: {

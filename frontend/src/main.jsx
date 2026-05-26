@@ -16,6 +16,7 @@ class ErrorBoundary extends React.Component {
   }
   componentDidCatch(error, info) {
     console.error('App crashed:', error, info);
+    this.setState({ componentStack: info?.componentStack });
   }
   render() {
     if (this.state.hasError) {
@@ -49,6 +50,7 @@ class ErrorBoundary extends React.Component {
             wordBreak: 'break-word',
           }}>
             {this.state.error?.toString()}
+            {this.state.componentStack}
           </pre>
         </div>
       );
