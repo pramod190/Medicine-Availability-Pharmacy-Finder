@@ -37,17 +37,19 @@ export default function Analytics() {
         getAnalyticsSummary(),
         getCategoryStats(),
       ]);
-      setTopSearches(top.data);
-      setDailyTrends(daily.data);
-      setLowStock(stock.data);
-      setSummary(sum.data);
-      setCategories(cats.data);
+      setTopSearches(Array.isArray(top.data)   ? top.data   : []);
+      setDailyTrends(Array.isArray(daily.data) ? daily.data : []);
+      setLowStock(Array.isArray(stock.data)    ? stock.data : []);
+      setSummary(sum.data || null);
+      setCategories(Array.isArray(cats.data)   ? cats.data  : []);
     } catch (err) {
-      console.error(err);
+      console.error('Analytics load error:', err);
+      // Keep empty arrays — don't crash the page
     } finally {
       setLoading(false);
     }
   };
+
 
   useEffect(() => { load(); }, [days]);
 
