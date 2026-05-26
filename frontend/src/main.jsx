@@ -41,19 +41,21 @@ class ErrorBoundary extends React.Component {
           >
             Refresh Page
           </button>
-          {import.meta.env.DEV && (
-            <pre style={{
-              marginTop: 24, color: '#ff4f6b', fontSize: 11,
-              textAlign: 'left', maxWidth: 600, overflow: 'auto',
-            }}>
-              {this.state.error?.toString()}
-            </pre>
-          )}
+          <pre style={{
+            marginTop: 24, color: '#ff4f6b', fontSize: 12,
+            textAlign: 'left', maxWidth: '90vw', overflow: 'auto',
+            background: 'rgba(255,79,107,0.08)', padding: 16, borderRadius: 8,
+            border: '1px solid rgba(255,79,107,0.3)', whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+          }}>
+            {this.state.error?.toString()}
+          </pre>
         </div>
       );
     }
     return this.props.children;
   }
+
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
