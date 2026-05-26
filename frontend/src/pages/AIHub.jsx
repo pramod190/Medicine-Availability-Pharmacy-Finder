@@ -93,7 +93,8 @@ export default function AIHub() {
       <section className="aihub-features">
         <div className="aihub-features-container">
           {AI_FEATURES.map((f) => {
-            const c = COLOR_MAP[f.color];
+            const c = COLOR_MAP[f.color] || COLOR_MAP['purple'];
+
             return (
               <div
                 key={f.title}
