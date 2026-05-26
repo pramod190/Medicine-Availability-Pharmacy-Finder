@@ -4,8 +4,6 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
-  // In production builds (Vercel), there is no dev-server proxy.
-  // The frontend calls VITE_API_URL directly (set to Render URL).
   const backendTarget = env.VITE_BACKEND_PROXY_URL || 'http://localhost:5000';
 
   return {
@@ -13,6 +11,18 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'dist',
       sourcemap: false,
+      chunkSizeWarningLimit: 600,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor-react':    ['react', 'react-dom', 'react-router-dom'],
+            'vendor-charts':   ['recharts'],
+            'vendor-socket':   ['socket.io-client'],
+            'vendor-ui':       ['lucide-react', 'react-toastify', 'react-dropzone'],
+            'vendor-utils':    ['axios', 'date-fns'],
+          },
+        },
+      },
     },
     server: {
       port: 5173,
