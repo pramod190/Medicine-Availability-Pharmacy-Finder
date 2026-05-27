@@ -22,8 +22,9 @@ export default function Home() {
 
   useEffect(() => {
     getTopSearches(7, 8)
-      .then((r) => setTrending(r.data))
+      .then((r) => setTrending(Array.isArray(r.data) ? r.data : []))
       .catch(() => {});
+
 
     navigator.geolocation?.getCurrentPosition(
       (p) => setLocation({ lat: p.coords.latitude, lng: p.coords.longitude }),
